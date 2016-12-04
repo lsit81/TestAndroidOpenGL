@@ -3,6 +3,7 @@ package com.lsit.android.testopengl;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.lsit.android.testopengl.gl.v1.OpenGLES10Activity;
 import com.lsit.android.testopengl.gl.v2.OpenGLES20Activity;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        Log.d("test", stringFromJNI());
     }
 
     @OnClick(R.id.button_opengl_v1)
@@ -32,4 +34,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OpenGLES10Activity.class);
         startActivity(intent);
     }
+
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    public native String stringFromJNI();
 }
